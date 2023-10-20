@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.signature {
+    margin: 0;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    color: rgba(196, 196, 196, 0.5);
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Challenges</title>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        position: relative;
+        min-height: 100vh;
+        background-color: #121212;
+        color: white;
+      }
+
+      main {
+        padding: 2rem;
+      }
+
+      h1 {
+        margin: 0rem 0rem 2rem 0rem;
+      }
+
+      ul a {
+        color: white;
+        font-size: 1rem;
+      }
+
+      ul a:hover {
+        text-decoration: none;
+      }
+    </style>
+
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+
+  <body>
+    <main>
+      <h1>List of the link</h1>
+
+      <ul id="list"></ul>
+    </main>
+
+    <script src="./index.js"></script>
+
+    <script type="text/javascript">
+      const linkList = [
+        {
+          href: "./challenges/Glowing Neon Button.html",
+          name: "Glowing Neon Button",
+        },
+      ];
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const ref = document.querySelector("#list");
+
+        for (let i = 0; i < linkList.length; i++) {
+          let liElement = document.createElement("li");
+          let aElement = document.createElement("a");
+          aElement.href = linkList[i].href;
+          aElement.textContent = linkList[i].name;
+          liElement.appendChild(aElement);
+          ref.appendChild(liElement);
+        }
+      });
+    </script>
+  </body>
+</html>
