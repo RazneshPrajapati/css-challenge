@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Task Management</title>
+
+    <link rel="stylesheet" href="../index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
+
+      *,
+      *::after,
+      *::before {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        user-select: none;
+      }
+
+      :root {
+        --tag-color-one: #e0fbf6;
+        --tag-color-text-one: #89cdbf;
+        --tag-color-two: #ece7fe;
+        --tag-color-text-two: #a096f5;
+        --tag-color-three: #fde7ea;
+        --tag-color-text-three: #ec999d;
+        --tag-color-four: #f7f8fc;
+        --tag-color-text-four: #aab5d1;
+        --box-color: #fff1d6;
+        --box-color-2: #d3e6ff;
+        --box-color-3: #ffd9d9;
+        --box-color-4: #daffe5;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        width: 100%;
+        height: 100vh;
+        color: #3d4a5c;
+        overflow: hidden;
+      }
+
+      aside {
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 14rem;
+        height: 100vh;
+        background-color: #f9fafb;
+        box-shadow: 2px 0px 15px 4px #3d4a5c2f;
+        z-index: 10;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        color: #3d4a5c;
+        text-transform: uppercase;
+        letter-spacing: -0.03em;
+        padding: 1.4rem 0rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .menu-items {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        height: calc(100vh - 5.4rem);
+        width: 100%;
+        overflow-y: auto;
+      }
+
+      .menu-items li {
+        padding: 0.5rem 0rem 0.5rem 1.4rem;
+      }
+
+      .menu-items li:hover {
+        cursor: pointer;
+        background-color: aliceblue;
+      }
+
+      .menu-items i {
+        font-size: 1rem;
+        color: #3d4a5c;
+        margin-right: 0.8rem;
+      }
+
+      .menu-items span {
+        font-weight: bold;
+        color: #7e8aa3;
+        line-height: 1.8;
+      }
+
+      .action-list {
+        margin-bottom: 2rem;
+      }
+
+      .conatiner {
+        margin-left: 14rem;
+        padding: 1.8rem 0rem 1.8rem 1.8rem;
+        display: flex;
+      }
+
+      .page-content {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding: 40px 20px 0 20px;
+      }
+
+      .header {
+        font-weight: 400;
+        font-size: 2rem;
+      }
+
+      .content-categories {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+        border-bottom: 1px solid #ddd;
+        padding: 20px 0;
+      }
+
+      .nav-item {
+        display: none;
+      }
+      .category {
+        font-weight: 500;
+        border-bottom: 1px solid #ddd;
+        transition: 0.4s ease-in;
+        padding: 20px 30px;
+        cursor: pointer;
+      }
+
+      #opt-1:checked + label,
+      #opt-2:checked + label,
+      #opt-3:checked + label,
+      #opt-4:checked + label {
+        color: rgb(9 148 119);
+        border-bottom: 2px solid rgb(0 185 146);
+      }
+
+      .task-item {
+        display: none;
+      }
+
+      .tasks-wrapper {
+        padding: 30px 0;
+        flex: 1;
+        overflow-y: auto;
+        height: calc(100vh - 8rem);
+        padding-right: 8px;
+      }
+
+      .task {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        margin-bottom: 16px;
+        padding-left: 30px;
+        font-size: 13px;
+        font-weight: 500;
+      }
+
+      .task:hover {
+        transform: translatex(2px);
+      }
+
+      .task label {
+        cursor: pointer;
+      }
+
+      label .label-text {
+        position: relative;
+      }
+
+      label .label-text:before {
+        content: "";
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        left: -24px;
+        transition: 0.2s ease;
+      }
+
+      .task-item:checked + label .label-text:before {
+        background-color: rgb(9 148 119);
+        border: none;
+        background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/White_check.svg/600px-White_check.svg.png");
+        accent-color: rgb(9 148 119);
+        background-repeat: no-repeat;
+        background-size: 10px;
+        background-position: center;
+        border: 1px solid rgb(9 148 119);
+      }
+
+      .tag {
+        font-size: 11px;
+        padding: 4px 8px;
+        border-radius: 20px;
+      }
+
+      .tag.approved {
+        background-color: var(--tag-color-one);
+        color: var(--tag-color-text-one);
+      }
+
+      .tag.progress {
+        background-color: var(--tag-color-two);
+        color: var(--tag-color-text-two);
+      }
+
+      .tag.review {
+        background-color: var(--tag-color-three);
+        color: var(--tag-color-text-three);
+      }
+
+      .tag.waiting {
+        background-color: var(--tag-color-four);
+        color: var(--tag-color-text-four);
+      }
+
+      .upcoming {
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 30px;
+        margin: 30px 0px;
+      }
+
+      .members {
+        display: flex;
+        margin-top: 14px;
+      }
+
+      .members img {
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        margin-right: 4px;
+        object-fit: cover;
+      }
+
+      .right-bar {
+        width: 320px;
+        border-left: 1px solid #e3e7f7;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .right-bar .header {
+        font-size: 20px;
+        margin-left: 30px;
+      }
+
+      .top-part {
+        padding: 30px;
+        display: flex;
+        align-items: center;
+        align-self: flex-end;
+      }
+
+      .top-part i {
+        width: 14px;
+        height: 14px;
+        margin-right: 14px;
+      }
+
+      .top-part .count {
+        font-size: 12px;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        background-color: #623ce8;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .right-content {
+        padding: 10px 40px;
+        overflow-y: auto;
+        height: calc(100vh - 6rem);
+      }
+
+      .task-box {
+        position: relative;
+        border-radius: 12px;
+        width: 100%;
+        margin: 20px 0;
+        padding: 16px;
+        cursor: pointer;
+        box-shadow: 2px 2px 4px 0px rgba(235, 235, 235, 1);
+      }
+
+      .task-box:hover {
+        transform: scale(1.02);
+      }
+
+      .time {
+        margin-bottom: 6px;
+        opacity: 0.4;
+        font-size: 10px;
+      }
+
+      .task-name {
+        font-size: 14px;
+        font-weight: 500;
+        opacity: 0.6;
+      }
+
+      .yellow {
+        background-color: var(--box-color);
+      }
+
+      .blue {
+        background-color: var(--box-color-2);
+      }
+
+      .red {
+        background-color: var(--box-color-3);
+      }
+
+      .green {
+        background-color: var(--box-color-4);
+      }
+
+      .more-button {
+        position: absolute;
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background-color: #8e92a4;
+        box-shadow: 0 -4px 0 0 #8e92a4, 0 4px 0 0 #8e92a4;
+        opacity: 0.4;
+        right: 20px;
+        top: 30px;
+        cursor: pointer;
+      }
+
+      @media screen and (max-width: 900px) {
+        .aside {
+          display: none;
+        }
+      }
+
+      @media screen and (max-width: 700px) {
+        .task-manager {
+          flex-direction: column;
+          overflow-y: auto;
+        }
+
+        .right-bar,
+        .page-content {
+          width: 100%;
+          display: block;
+        }
+
+        .tasks-wrapper {
+          height: auto;
+        }
+      }
+
+      @media screen and (max-width: 520px) {
+        .page-content {
+          padding: 40px 10px 0 10px;
+        }
+
+        .right-content {
+          padding: 10px 16px;
+        }
+
+        .category {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <aside>
+        <div class="logo">Meow Task</div>
+        <div class="menu-items">
+          <ul class="action-list">
+            <li><i class="fa-solid fa-inbox"></i><span>Inbox</span></li>
+            <li><i class="fa-regular fa-star"></i><span>Today</span></li>
+            <li><i class="fa-regular fa-calendar"></i><span>Upcoming</span></li>
+            <li><i class="fa-solid fa-hashtag"></i><span>Important</span></li>
+            <li><i class="fa-solid fa-user-group"></i><span>Meetings</span></li>
+            <li><i class="fa-solid fa-trash"></i><span>Task</span></li>
+          </ul>
+          <ul class="category-list">
+            <li><i class="fa-solid fa-user-group"></i><span>Family</span></li>
+            <li><i class="fa-solid fa-sun"></i><span>Vacation</span></li>
+            <li><i class="fa-solid fa-gift"></i><span>Festival</span></li>
+            <li><i class="fa-solid fa-music"></i><span>Concerts</span></li>
+          </ul>
+        </div>
+      </aside>
+
+      <section class="conatiner">
+        <section class="page-content">
+          <h1 class="header">Today Tasks</h1>
+
+          <div class="content-categories">
+            <div class="label-wrapper">
+              <input
+                class="nav-item"
+                name="nav"
+                type="radio"
+                id="opt-1"
+                checked
+              />
+              <label class="category" for="opt-1">All</label>
+            </div>
+            <div class="label-wrapper">
+              <input class="nav-item" name="nav" type="radio" id="opt-2" />
+              <label class="category" for="opt-2">Important</label>
+            </div>
+            <div class="label-wrapper">
+              <input class="nav-item" name="nav" type="radio" id="opt-3" />
+              <label class="category" for="opt-3">Notes</label>
+            </div>
+            <div class="label-wrapper">
+              <input class="nav-item" name="nav" type="radio" id="opt-4" />
+              <label class="category" for="opt-4">Links</label>
+            </div>
+          </div>
+
+          <article class="tasks-wrapper">
+            <div class="task">
+              <input
+                class="task-item"
+                name="task"
+                type="checkbox"
+                id="item-1"
+                checked
+              />
+              <label for="item-1">
+                <span class="label-text">Dashboard Design Implementation</span>
+              </label>
+              <span class="tag approved">Approved</span>
+            </div>
+            <div class="task">
+              <input
+                class="task-item"
+                name="task"
+                type="checkbox"
+                id="item-2"
+                checked
+              />
+              <label for="item-2">
+                <span class="label-text">Create a userflow</span>
+              </label>
+              <span class="tag progress">In Progress</span>
+            </div>
+            <div class="task">
+              <input
+                class="task-item"
+                name="task"
+                type="checkbox"
+                id="item-3"
+              />
+              <label for="item-3">
+                <span class="label-text">Application Implementation</span>
+              </label>
+              <span class="tag review">In Review</span>
+            </div>
+            <div class="task">
+              <input
+                class="task-item"
+                name="task"
+                type="checkbox"
+                id="item-4"
+              />
+              <label for="item-4">
+                <span class="label-text">Create a Dashboard Design</span>
+              </label>
+              <span class="tag progress">In Progress</span>
+            </div>
+            <div class="header upcoming">Upcoming Tasks</div>
+            <div class="task">
+              <input
+                class="task-item"
+                name="task"
+                type="checkbox"
+                id="item-7"
+              />
+              <label for="item-7">
+                <span class="label-text">Dashboard Design Implementation</span>
+              </label>
+              <span class="tag waiting">Waiting</span>
+            </div>
+            <div class="task">
+              <input
+                class="task-item"
+                name="task"
+                type="checkbox"
+                id="item-8"
+              />
+              <label for="item-8">
+                <span class="label-text">Create a userflow</span>
+              </label>
+              <span class="tag waiting">Waiting</span>
+            </div>
+            <div class="task">
+              <input
+                class="task-item"
+                name="task"
+                type="checkbox"
+                id="item-9"
+              />
+              <label for="item-9">
+                <span class="label-text">Application Implementation</span>
+              </label>
+              <span class="tag waiting">Waiting</span>
+            </div>
+            <div class="task">
+              <input
+                class="task-item"
+                name="task"
+                type="checkbox"
+                id="item-10"
+              />
+              <label for="item-10">
+                <span class="label-text">Create a Dashboard Design</span>
+              </label>
+              <span class="tag waiting">Waiting</span>
+            </div>
+          </article>
+        </section>
+
+        <section class="right-bar">
+          <div class="top-part">
+            <i class="fa-solid fa-user-group feather feather-users"></i>
+
+            <div class="count">6</div>
+          </div>
+          <div class="header">Schedule</div>
+          <div class="right-content">
+            <div class="task-box yellow">
+              <div class="description-task">
+                <div class="time">08:00 - 09:00 AM</div>
+                <div class="task-name">Product Review</div>
+              </div>
+              <div class="more-button"></div>
+              <div class="members">
+                <img src="https://i.pravatar.cc/64?u=fake1" alt="member" />
+                <img src="https://i.pravatar.cc/64?u=fake2" alt="member-2" />
+                <img src="https://i.pravatar.cc/64?u=fake3" alt="member-3" />
+                <img src="https://i.pravatar.cc/64?u=fake4" alt="member-4" />
+              </div>
+            </div>
+            <div class="task-box blue">
+              <div class="description-task">
+                <div class="time">10:00 - 11:00 AM</div>
+                <div class="task-name">Design Meeting</div>
+              </div>
+              <div class="more-button"></div>
+              <div class="members">
+                <img src="https://i.pravatar.cc/64?u=fake5" alt="member" />
+                <img src="https://i.pravatar.cc/64?u=fake6" alt="member-2" />
+                <img src="https://i.pravatar.cc/64?u=fake7" alt="member-3" />
+              </div>
+            </div>
+            <div class="task-box red">
+              <div class="description-task">
+                <div class="time">01:00 - 02:00 PM</div>
+                <div class="task-name">Team Meeting</div>
+              </div>
+              <div class="more-button"></div>
+              <div class="members">
+                <img src="https://i.pravatar.cc/64?u=fake1" alt="member" />
+                <img src="https://i.pravatar.cc/64?u=fake2" alt="member-2" />
+                <img src="https://i.pravatar.cc/64?u=fake3" alt="member-3" />
+                <img src="https://i.pravatar.cc/64?u=fake4" alt="member-4" />
+              </div>
+            </div>
+            <div class="task-box green">
+              <div class="description-task">
+                <div class="time">03:00 - 04:00 PM</div>
+                <div class="task-name">Release Event</div>
+              </div>
+              <div class="more-button"></div>
+              <div class="members">
+                <img src="https://i.pravatar.cc/64?u=fake5" alt="member" />
+                <img src="https://i.pravatar.cc/64?u=fake6" alt="member-2" />
+                <img src="https://i.pravatar.cc/64?u=fake7" alt="member-3" />
+                <img src="https://i.pravatar.cc/64?u=fake8" alt="member-4" />
+                <img src="https://i.pravatar.cc/64?u=fake9" alt="member-5" />
+              </div>
+            </div>
+            <div class="task-box blue">
+              <div class="description-task">
+                <div class="time">08:00 - 09:00 PM</div>
+                <div class="task-name">Release Event</div>
+              </div>
+              <div class="more-button"></div>
+              <div class="members">
+                <img src="https://i.pravatar.cc/64?u=fake5" alt="member" />
+                <img src="https://i.pravatar.cc/64?u=fake6" alt="member-2" />
+                <img src="https://i.pravatar.cc/64?u=fake7" alt="member-3" />
+                <img src="https://i.pravatar.cc/64?u=fake8" alt="member-4" />
+                <img src="https://i.pravatar.cc/64?u=fake9" alt="member-5" />
+              </div>
+            </div>
+            <div class="task-box yellow">
+              <div class="description-task">
+                <div class="time">11:00 - 12:00 PM</div>
+                <div class="task-name">Practise</div>
+              </div>
+              <div class="more-button"></div>
+              <div class="members">
+                <img src="https://i.pravatar.cc/64?u=fake1" alt="member" />
+                <img src="https://i.pravatar.cc/64?u=fake2" alt="member-2" />
+                <img src="https://i.pravatar.cc/64?u=fake3" alt="member-3" />
+                <img src="https://i.pravatar.cc/64?u=fake4" alt="member-4" />
+              </div>
+            </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="../index.js"></script>
+    <script type="text/javascript"></script>
+  </body>
+</html>
