@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Side Navigation Bar</title>
+
+    <link rel="stylesheet" href="../index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap");
+      body {
+        font-family: "Montserrat", sans-serif;
+      }
+
+      .side-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 16rem;
+        background-image: linear-gradient(30deg, #0048bd, #44a7fd);
+        border-top-right-radius: 5rem;
+      }
+
+      .side-menu > p {
+        color: white;
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin: 3rem 0rem;
+        padding-left: 0.5rem;
+      }
+
+      .menu-items {
+        color: white;
+        height: 100%;
+        padding: 14px 0px 14px 1rem;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      .menu-item {
+        position: relative;
+        padding: 0.75rem 0rem 0.75rem 1.5rem;
+        border-top-left-radius: 10rem;
+        border-bottom-left-radius: 10rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+      }
+
+      .menu-item:hover {
+        cursor: pointer;
+        color: #3f5efb;
+        background-color: white;
+      }
+
+      .menu-item:hover::after {
+        content: "";
+        position: absolute;
+        bottom: 100%;
+        right: 0;
+        background-color: transparent;
+        height: 25px;
+        width: 25px;
+        border-bottom-right-radius: 18px;
+        box-shadow: 5px 5px 0px #fff;
+      }
+
+      .menu-item:hover::before {
+        content: "";
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: transparent;
+        height: 25px;
+        width: 25px;
+        border-top-right-radius: 18px;
+        box-shadow: 5px -5px 0px #fff;
+      }
+
+      .menu-item i {
+        margin-right: 0.5rem;
+      }
+
+      main {
+        margin-left: 16rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      h3 {
+        text-align: center;
+        letter-spacing: 2px;
+        line-height: 1.8rem;
+      }
+    </style>
+  </head>
+  <body>
+    <aside class="side-menu">
+      <p>Menu</p>
+
+      <section class="menu-items">
+        <div class="menu-item">
+          <i class="fa-solid fa-user"></i>
+          <span>My drive</span>
+        </div>
+        <div class="menu-item">
+          <i class="fa-solid fa-display"></i>
+          <span>Computers</span>
+        </div>
+        <div class="menu-item">
+          <i class="fa-solid fa-clone"></i>
+          <span>Shared with me</span>
+        </div>
+        <div class="menu-item">
+          <i class="fa-solid fa-star"></i>
+          <span>Starred</span>
+        </div>
+        <div class="menu-item">
+          <i class="fa-solid fa-trash-can"></i>
+          <span>Trash</span>
+        </div>
+      </section>
+    </aside>
+
+    <main>
+      <h3>
+        Modern Side Navigation using <br />
+        HTML and CSS
+      </h3>
+    </main>
+
+    <script src="../index.js"></script>
+    <script type="text/javascript"></script>
+  </body>
+</html>
