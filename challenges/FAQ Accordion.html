@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ Accordion</title>
+
+    <link rel="stylesheet" href="../index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Hind:300,400&display=swap");
+      * {
+        box-sizing: border-box;
+      }
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Hind", sans-serif;
+        background: #fff;
+        color: #4d5974;
+        display: flex;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+      }
+
+      main {
+        width: 50%;
+      }
+
+      h2 {
+        text-align: center;
+      }
+
+      .accordion button {
+        border: none;
+        background: none;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.3rem;
+        border-bottom: 1px solid black;
+        padding: 1rem 0rem;
+        cursor: pointer;
+        outline: none;
+      }
+
+      .accordion-button[aria-expanded="true"] {
+        color: #03b5d2;
+        border-bottom: 1px solid #03b5d2;
+      }
+
+      .accordion-button:hover {
+        color: #03b5d2;
+        border-bottom: 1px solid #03b5d2;
+      }
+
+      .accordion-button[aria-expanded="true"] i {
+        color: #03b5d2;
+      }
+
+      .accordion-button:hover i {
+        color: #03b5d2;
+      }
+
+      .accordion-button[aria-expanded="false"] .minus-icon {
+        display: none;
+      }
+
+      .accordion-button[aria-expanded="true"] .plus-icon {
+        display: none;
+      }
+
+      .accordion button[aria-expanded="true"] + .accordion-content {
+        opacity: 1;
+        transition: all 200ms linear;
+        will-change: opacity, max-height;
+      }
+
+      .accordion .accordion-content {
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: opacity 200ms linear, max-height 200ms linear;
+        will-change: opacity, max-height;
+      }
+
+      .accordion .accordion-content p {
+        font-size: 1rem;
+        font-weight: 300;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h2>Accordion Demo</h2>
+      <div class="accordions" id="accordion-example">
+        <div class="accordion">
+          <button class="accordion-button" aria-expanded="false">
+            <div>Why is the moon sometimes out during the day?</div>
+            <div>
+              <i class="fa-solid fa-circle-plus plus-icon"></i>
+              <i class="fa-solid fa-circle-minus minus-icon"></i>
+            </div>
+          </button>
+          <div class="accordion-content">
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore
+              obcaecati ut labore aut cumque. Voluptates consectetur tempore,
+              qui dolorem quia sit vel ex harum obcaecati corporis fugit, in, ad
+              dolorum?
+            </p>
+          </div>
+        </div>
+
+        <div class="accordion">
+          <button class="accordion-button" aria-expanded="false">
+            <div>Why is giraff tall?</div>
+            <div>
+              <i class="fa-solid fa-circle-plus plus-icon"></i>
+              <i class="fa-solid fa-circle-minus minus-icon"></i>
+            </div>
+          </button>
+          <div class="accordion-content">
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore
+              obcaecati ut labore aut cumque. Voluptates consectetur tempore,
+              qui dolorem quia sit vel ex harum obcaecati corporis fugit, in, ad
+              dolorum?Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Tempore obcaecati ut labore aut cumque. Voluptates consectetur
+              tempore, qui dolorem quia sit vel ex harum obcaecati corporis
+              fugit, in, ad dolorum? Lorem ipsum dolor sit, amet consectetur
+              adipisicing elit. Tempore obcaecati ut labore aut cumque.
+              Voluptates consectetur tempore, qui dolorem quia sit vel ex harum
+              obcaecati corporis fugit, in, ad dolorum? Lorem ipsum dolor sit,
+              amet consectetur adipisicing elit. Tempore obcaecati ut labore aut
+              cumque. Voluptates consectetur tempore, qui dolorem quia sit vel
+              ex harum obcaecati corporis fugit, in, ad dolorum?
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="../index.js"></script>
+    <script type="text/javascript">
+      const items = document.querySelectorAll(".accordion button");
+      function toggleAccordion() {
+        const itemToggle = this.getAttribute("aria-expanded");
+        for (i = 0; i < items.length; i++) {
+          items[i].setAttribute("aria-expanded", "false");
+
+          const panel = items[i].nextElementSibling;
+          panel.style.maxHeight = null;
+        }
+        if (itemToggle == "false") {
+          this.setAttribute("aria-expanded", "true");
+
+          const panel = this.nextElementSibling;
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      }
+      items.forEach((item) => item.addEventListener("click", toggleAccordion));
+    </script>
+  </body>
+</html>
