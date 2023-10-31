@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Toggle Neumorphism Switch</title>
+
+    <link rel="stylesheet" href="../index.css" />
+
+    <style>
+      main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #e7e5e7;
+        font-family: sans-serif;
+      }
+
+      .switch {
+        position: relative;
+        height: 10rem;
+        width: 10rem;
+        border-radius: 100%;
+        border: 3px solid #dcdcdc;
+        box-shadow: 7px 7px 23px #bebebe, -7px -7px 23px #ffffff;
+        overflow: hidden;
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #9a9a9a;
+        cursor: pointer;
+        transition: 0.5s;
+      }
+
+      .slider-on {
+        color: white;
+        background-color: #49d84e;
+      }
+
+      .slider-1 div {
+        transition: 0.5s;
+        position: absolute;
+        width: 100%;
+        height: 50%;
+        left: 0;
+      }
+
+      input:checked ~ .slider-1 .top {
+        transform: translateY(-100%);
+        transition-delay: 1s;
+      }
+
+      input:checked ~ .slider-1 .bottom {
+        transform: translateY(100%);
+        transition-delay: 1s;
+      }
+
+      input:checked ~ .slider-2 {
+        transform: translateX(100%);
+        transition-delay: 0.5s;
+      }
+
+      input:checked ~ .slider-off {
+        transform: translateX(-100%);
+        transition-delay: 0s;
+      }
+
+      .slider-1 .top {
+        transform: translateY(0);
+        top: 0;
+        background-color: #f3f3f3;
+        transition-delay: 0s;
+      }
+
+      .slider-1 .bottom {
+        transform: translateY(0);
+        bottom: 0;
+        background-color: #f3f3f3;
+        border-top: 1px solid #e0e0e0;
+        transition-delay: 0s;
+      }
+
+      .slider-2 {
+        background-color: #e6e6e6;
+        transition-delay: 0.5s;
+        transform: translateX(0);
+        border-left: 1px solid #d2d2d2;
+      }
+
+      .slider-off {
+        background-color: #d2d2d2;
+        transition-delay: 1s;
+        transform: translatex(0);
+        border-right: 1px solid #d2d2d2;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <label class="switch">
+        <input type="checkbox" />
+        <div class="slider slider-on">ON</div>
+        <div class="slider slider-1">
+          <div class="top"></div>
+          <div class="bottom"></div>
+        </div>
+        <div class="slider slider-2"></div>
+        <div class="slider slider-off">OFF</div>
+      </label>
+    </main>
+
+    <script src="../index.js"></script>
+    <script type="text/javascript"></script>
+  </body>
+</html>
