@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dropmorphism</title>
+
+    <link rel="stylesheet" href="../index.css" />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap");
+      body {
+        height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        background: #318cfe;
+        font-family: "Montserrat", sans-serif;
+      }
+
+      main {
+        position: relative;
+      }
+
+      .text {
+        color: white;
+      }
+
+      .text h1 {
+        text-transform: uppercase;
+        letter-spacing: 0.75rem;
+        font-size: 2.5rem;
+      }
+
+      .text p {
+        text-align: center;
+        font-size: 1.2rem;
+      }
+
+      .drop {
+        position: absolute;
+        height: 200px;
+        width: 200px;
+        background: #54abfb;
+        border-radius: 51% 49% 48% 52% / 62% 44% 56% 38%;
+        opacity: 0.8;
+        border: 2px solid #3d93ff;
+      }
+
+      .drop::before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background: #318cfe;
+        border-radius: 51% 49% 48% 52% / 62% 44% 56% 38%;
+        box-shadow: -20px 30px 16px #1b6cfb, -40px 60px 32px #1b6cfb,
+          inset -6px 6px 10px #1b6cfb, inset 2px 6px 10px #1a74e5,
+          inset 20px -20px 22px white, inset 40px -40px 44px #a8ceff;
+      }
+
+      .drop::after {
+        content: "";
+        position: absolute;
+        height: 40px;
+        width: 40px;
+        background: #e6fdfb;
+        border-radius: 44% 56% 46% 54% / 36% 50% 50% 64%;
+        left: 130px;
+        top: 40px;
+        box-shadow: 16px 40px 0 -10px white;
+        opacity: 0.8;
+      }
+
+      .drop-1 {
+        left: -100px;
+        top: -50px;
+      }
+
+      .drop-2 {
+        right: -100px;
+        bottom: -50px;
+        z-index: -1;
+        border-radius: 46% 50% 39% 54% / 56% 57% 50% 50%;
+      }
+
+      .drop-2::before {
+        border-radius: 46% 50% 39% 54% / 56% 57% 50% 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="drop drop-1"></div>
+      <div class="drop drop-2"></div>
+      <div class="text">
+        <h1>Dropmorphism</h1>
+        <p>Both the drops are created using CSS.</p>
+      </div>
+    </main>
+
+    <script src="../index.js"></script>
+    <script type="text/javascript"></script>
+  </body>
+</html>
