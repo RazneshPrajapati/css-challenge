@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card Hover Effects</title>
+
+    <link rel="stylesheet" href="../index.css" />
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      main {
+        padding: 2rem;
+        background-color: #343440;
+        min-height: calc(100vh - 4rem);
+      }
+
+      .cards {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        min-height: calc(100vh - 4rem);
+      }
+
+      .card {
+        height: 18rem;
+        width: 12rem;
+        background-repeat: no-repeat;
+        transition: all 0.3s ease-in-out;
+        background-color: rgba(240, 255, 255, 0.3);
+      }
+
+      .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+      }
+
+      .card-1 {
+        background-image: url("https://picsum.photos/192/288?random=1");
+      }
+
+      .card-2 {
+        background-image: url("https://picsum.photos/192/288?random=2");
+      }
+
+      .card-3 {
+        background-image: url("https://picsum.photos/192/288?random=3");
+      }
+
+      .card-4 {
+        background-image: url("https://picsum.photos/192/288?random=4");
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="cards">
+        <div class="card card-1"></div>
+        <div class="card card-2"></div>
+        <div class="card card-3"></div>
+        <div class="card card-4"></div>
+      </section>
+    </main>
+
+    <script src="../index.js"></script>
+    <script type="text/javascript"></script>
+  </body>
+</html>
